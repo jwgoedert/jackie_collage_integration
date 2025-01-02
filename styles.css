@@ -1,62 +1,95 @@
+/* General Styles */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    overflow: hidden; /* Disable scrollbars initially */
   }
   
   #vine-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
     overflow-x: scroll;
-    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    background-color: #f3f3f3;
+    padding: 20px;
   }
   
   #vine-line {
-    position: relative;
-    width: 500vw; /* Set to fit all years */
-    height: 10px;
-    background: green;
+    display: flex;
+    gap: 20px;
   }
   
-  .flower {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    transform: translate(-50%, -50%);
-    transition: transform 0.3s ease, z-index 0.3s ease;
+  .project {
+    flex-shrink: 0;
+    width: 200px;
+    height: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
   
-  .flower:hover {
-    transform: scale(1.5);
-    z-index: 10;
+  .project img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
   }
   
+  #nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+  }
+  
+  button {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #005f99;
+  }
+  
+  /* Modal Styles */
   #modal {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
+    /* display: flex; */
     justify-content: center;
+    align-items: center;
     z-index: 1000;
   }
   
-  #modal.hidden {
+  .hidden {
     display: none;
   }
   
   #modal-content {
     background: white;
+    border-radius: 10px;
     padding: 20px;
-    border-radius: 8px;
-    width: 70%;
+    width: 60%;
     max-width: 800px;
     text-align: center;
+  }
+  
+  #gallery img {
+    margin: 10px;
+    max-width: 100px;
+    max-height: 100px;
+  }
+  
+  #related-projects li {
+    list-style: none;
+    margin: 5px 0;
   }
