@@ -1,0 +1,162 @@
+404 Item: '"1982 Valentines Drawing Contest Winner' has no match in directories.
+404 Item: '"1986 Football Stuff' -> Suggested Directory: '"1986 Football",'
+404 Item: '"2001 The Underdog Series' -> Suggested Directory: '"2001 Underdog Series",'
+404 Item: '"2001 Langton Performances' -> Suggested Directory: '"2001 Langton Performance",'
+404 Item: '"2001 Studio 10' -> Suggested Directory: '"2001 Studio 10 door",'
+404 Item: '"2002 Milk, A Self Portrait' -> Suggested Directory: '"2002 Milk, Self Portrait",'
+404 Item: '"2002 Underdog' -> Suggested Directory: '"2001 Underdog Series",'
+404 Item: '"2001 No Bush Project' -> Suggested Directory: '"2001 No Bush",'
+404 Item: '"2002 The Explorers' -> Suggested Directory: '"2002 Explorers",'
+404 Item: '"2002 Ikea Diaries' has no match in directories.
+404 Item: '"2002 **Herman’s House Starts here**' has no match in directories.
+404 Item: '"2003 Topiary Surrender' -> Suggested Directory: '"2003 Topiary Sniper",'
+404 Item: '" Habana Biennale' has no match in directories.
+404 Item: '"2003 Safety Video' has no match in directories.
+404 Item: '"2003 Estoy Enamamoranda' -> Suggested Directory: '"2003 Estoy Enamoranda",'
+404 Item: '"  Shock and Awe' -> Suggested Directory: '"2004 EAGLE WARRIOR_ Shock and Awe",'
+404 Item: '" Daily Dramatic' has no match in directories.
+404 Item: '"2006 THTHB Solitude' has no match in directories.
+404 Item: '"2006 Hermans House First Edition Book' -> Suggested Directory: '"2006 HermansHouseBook",'
+404 Item: '"2006 THTHB TULCA' has no match in directories.
+404 Item: '"2006 Akademie Schloss Solitude Fellow' has no match in directories.
+404 Item: '"2007 HH Herman’s Library 20 Years! Anniversary Show' has no match in directories.
+404 Item: '"2007 THTHB Artists Space' has no match in directories.
+404 Item: '"2008 THTHB Criminal Art & Criminal Justice' has no match in directories.
+404 Item: '"2008 Bacon Instead' -> Suggested Directory: '"2007 Bacon Instead",'
+404 Item: '"2008 Peripheral Cities' -> Suggested Directory: '"2006 Pizzeria Chinois",'
+404 Item: '"2008 THTHB Prospect One Biennial' has no match in directories.
+404 Item: '"2008 THTHB Taking Shelter' has no match in directories.
+404 Item: '"2008 THTHB Kelowna' has no match in directories.
+404 Item: '"2008 THTHB Royal College of Art' has no match in directories.
+404 Item: '"2008 South Dublin County In-Context Fellow' has no match in directories.
+404 Item: '"2009 A=AGHT' -> Suggested Directory: '"2009-2011 A=AGHT",'
+404 Item: '"2009 A=AGHT Travel Guide' -> Suggested Directory: '"2011 A=AGHT Travelguide Collage",'
+404 Item: '"2009 THTHB TYTUL ROBOCYZ. Working Title.' has no match in directories.
+404 Item: '"2009 HH Arbeitstitel. Working Title.' has no match in directories.
+404 Item: '"2009 THTHB, We Want, We Believe' has no match in directories.
+404 Item: '"2010 THTHB St Etienne Biennial of Design' has no match in directories.
+404 Item: '"2010 A=AGHT Book' -> Suggested Directory: '"2009-2011 A=AGHT",'
+404 Item: '"2011 Some People Like to Make Money, Some People Like to Make Friends,' -> Suggested Directory: '"2011 Some People Like to Make Money, Some People Like to make Friends",'
+404 Item: '"2011 THTHB RAE' has no match in directories.
+404 Item: '"2012 Climate of Punishment' has no match in directories.
+404 Item: '"2012 THTHB Westobou Festival for Contemporary Art' has no match in directories.
+404 Item: '"2012 The House That Herman Built' has no match in directories.
+404 Item: '"2013 Herman’s House, Second Edition' -> Suggested Directory: '"2006 HermansHouseBook",'
+404 Item: '"2013 HH Hermans Library ZKM' has no match in directories.
+404 Item: '"2013 THTHB Montreal' has no match in directories.
+404 Item: '"2013 Herman’s House' -> Suggested Directory: '"2006 HermansHouseBook",'
+404 Item: '"2013 Open Society Foundation Soros Justice Fellow' has no match in directories.
+404 Item: '"2014 THTHB Cue Art Foundation' has no match in directories.
+404 Item: '"data/converted' has no match in directories.
+404 Item: '"2014 First Solitary Gardens Woodfox’s Cell' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2015 THTHB The Big HOPE Show' has no match in directories.
+404 Item: '"2015 HH Hermans House Second Edition' has no match in directories.
+404 Item: '"2015 Nathan Cummings Foundation Project Fellow' has no match in directories.
+404 Item: '"2015 Nathan Cummings Foundation Grantee' has no match in directories.
+404 Item: '"2015 Eyebeam NYC Project Fellow' has no match in directories.
+404 Item: '"2015 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2016 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2017 Threshold Foundation' has no match in directories.
+404 Item: '"2017 Working Model of the World' -> Suggested Directory: '"2017 Working MOdel Collage",'
+404 Item: '"2017 A Blade of Grass Fellow' has no match in directories.
+404 Item: '"2017 Social Justice Seed Packets' -> Suggested Directory: '"2018 Social Justice Seed Packets",'
+404 Item: '"2017 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2018 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2018 The Solitary Gardens Girls Club' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2018 The Solitary Gardens Houston SHAPE' -> Suggested Directory: '"2021 A Solitary Greenhouse MSU",'
+404 Item: '"2018 The Solitary Gardens North Carolina' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2018 The Solitary Gardens Philly' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2018 The Solitary Gardens Providence' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2018 The Solitary Gardens Xavier' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2018 Robert Rauschenberg Artists-As-Activist Fellow' has no match in directories.
+404 Item: '"2018 Round 48 (g)Row House' -> Suggested Directory: '"2018 Round 48 (g)Row House (2018)",'
+404 Item: '"2019 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2019 Per(sister)' -> Suggested Directory: '"2019 Per(sister) (2019)",'
+404 Item: '"2019 Incarcerated Mom’s Gardens' has no match in directories.
+404 Item: '"2019 Mom’s Gardens Project Row House' has no match in directories.
+404 Item: '"2019 Mom’s Gardens Tulane' has no match in directories.
+404 Item: '"2019 A Landscape Without Prisons' has no match in directories.
+404 Item: '"2019 THTHB Cohen Gallery' has no match in directories.
+404 Item: '"2019 SOURCE Studio Corrine Meihle Fellowship' has no match in directories.
+404 Item: '"2019 Alien Apothecary' -> Suggested Directory: '"2021 Apothecafe",'
+404 Item: '"2019 Abolitionist’s Apothecary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2020 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2020 Growing Abolition at MoMA PS1' -> Suggested Directory: '"2021 Growing Abolition MoMA",'
+404 Item: '"2020 Barring Freedom' -> Suggested Directory: '"2020 Barring Freedom",'
+404 Item: '"2020 IN PLAIN SITE' has no match in directories.
+404 Item: '"2020 The Abolitionist’s Apothecarts' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2020 A Solitary Garden Harriet Beecher Stowe' has no match in directories.
+404 Item: '"2020 Abolitionist’s Apothecary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2020 Creative Capital Grantee' has no match in directories.
+404 Item: '"2021 Mom’s Gardens Girls Club' has no match in directories.
+404 Item: '"2021 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2021 Seeds of Resistance' -> Suggested Directory: '"2021 Seeds of Resistence",'
+404 Item: '"2021 Abolitionist’s Apothecary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2021 Solitary Greenhouse MSU' -> Suggested Directory: '"2021 A Solitary Greenhouse MSU",'
+404 Item: '"2021 A Solitary Garden Florence Griswold' -> Suggested Directory: '"2021 A Solitary Greenhouse MSU",'
+404 Item: '"2021 A Solitary Garden Visible Records' -> Suggested Directory: '"2021 A Solitary Greenhouse MSU",'
+404 Item: '"2021 Art-4-Justice Fellowship' has no match in directories.
+404 Item: '"2021 Propellor Impact Accelerator Fellowship' has no match in directories.
+404 Item: '"2021 Tea Party Girls Club New York' has no match in directories.
+404 Item: '"2021 Tea Party Burlington UVM' has no match in directories.
+404 Item: '"2021 Kaepernick Publishing Grantee' has no match in directories.
+404 Item: '"2021 The Abolitionist’s Sanctuary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2022 Tea Party City Park' has no match in directories.
+404 Item: '"2022 Abolitionist’s Apothecary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2022 JTLC' has no match in directories.
+404 Item: '"2022 The Abolitionist’s Sanctuary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2022 JTLC Mural' has no match in directories.
+404 Item: '"2022 Abolitionist Apothecarts' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2022 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2022 For Freedoms' -> Suggested Directory: '"2022 For Freedoms Billboard",'
+404 Item: '"2022 Freedom to Grow PS1 Installation (november)' -> Suggested Directory: '"2022 Freedom To Grow MoMA PS1 Installation (Nov)",'
+404 Item: '"2022 Grow Plants Not Prisons Greenhouse' -> Suggested Directory: '"2022-2024 Grow Plants Not Prisons Greenhouse",'
+404 Item: '"2022 The Abolitionist’s Fieldguide' -> Suggested Directory: '"2022 Abolitionist's Fieldguide",'
+404 Item: '"2022 A Solitary Greenhouse MoMA PS1 May' -> Suggested Directory: '"2021 A Solitary Greenhouse MSU",'
+404 Item: '"2022 The Abolitionist’s Tea Party Tour (Creative Capital)' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2022 Fieldnotes' -> Suggested Directory: '"2022 Field Notes",'
+404 Item: '"2022 Margarite Casey Foundation Grantee' has no match in directories.
+404 Item: '"2023 Mom’s Garden Davenport Jail' has no match in directories.
+404 Item: '"2022 Art-4-Justice Grantee' has no match in directories.
+404 Item: '"2023 Imagining Freedom, Mellon Foundation Grantee' has no match in directories.
+404 Item: '"2023 Tea Party UCSCIAS with Maria Gaspar' has no match in directories.
+404 Item: '"2023 Tea Party MoMA NYC' has no match in directories.
+404 Item: '"2023 JTLC' has no match in directories.
+404 Item: '"2023 The Abolitionist’s Sanctuary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2023 Abolitionist’s Apothecary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2023 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2023 Chrisitian A. Johnson Endeavor Foundation Fellowship' has no match in directories.
+404 Item: '"2023 A Garden of Good Grief' -> Suggested Directory: '"2023 Garden of Good Grief 2023",'
+404 Item: '"2023 Studio CAJAIR' -> Suggested Directory: '"2023-24 Studio Cajair",'
+404 Item: '"2023 Free Soil Party CounterPublic' -> Suggested Directory: '"2023 Free Soil PArty Counter Public",'
+404 Item: '"2024 Tea Party San Jose Museum' has no match in directories.
+404 Item: '"2024 The Abolitionist’s Sanctuary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2024 JTLC' has no match in directories.
+404 Item: '"2024 Abolitionist’s Apothecary' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2024 The Solitary Gardens Andry Street' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2024 A Solitary Gardens St Charles' -> Suggested Directory: '"2019 A Solitary Garden UCSCIAS",'
+404 Item: '"2024 Seeing Through Stone' -> Suggested Directory: '"2024 Seeing Through Stone, San Jose",'
+404 Item: '"2024 Open Society Fellowship Advancement Fund' has no match in directories.
+404 Item: '"2024 Behind These Walls: Reckoning with Incarceration' -> Suggested Directory: '"2024 Behind These Walls Michener Museum",'
+404 Item: '"2024 Color the Skies Fallen Prisons' -> Suggested Directory: '"2024 Color The Skies",'
+404 Item: '"2024 The Abolitionist’s Tea Party' -> Suggested Directory: '"2022 Abolitionist's Tea Party Tour",'
+404 Item: '"2024 Guggenheim Fellowship for the Arts' has no match in directories.
+404 Item: '"2024 The Locker Room' -> Suggested Directory: '"2024 The Locker Room",'
+404 Item: '"2025 Freedom to Grow Community Archive' -> Suggested Directory: '"2025 Freedom To Grow",'
+404 Item: '"2025 Walls Turned Sideways' has no match in directories.
+404 Item: '"2025 SOIL' has no match in directories.
+404 Item: '"2025 Freedom to Grow' -> Suggested Directory: '"2025 Freedom To Grow",'
+404 Item: '"2030 Dead' has no match in directories.
+404 Item: '"0 Test Fellowship' has no match in directories.
+404 Item: '"0 Test Award' has no match in directories.
+404 Item: '"0 Test Exhibit' has no match in directories.
+404 Item: '"0' has no match in directories.
+404 Item: '"0 Test Group Exhibit' has no match in directories.
+404 Item: '"0 Test Interview' has no match in directories.
+404 Item: '"0 Test Residency' has no match in directories.
+404 Item: '"0 Test Teaching' has no match in directories.
+404 Item: '"0 Test Publication' has no match in directories.
+404 Item: '"0 Test Review' has no match in directories.
+404 Item: '"0 Test Writing' has no match in directories.
+404 Item: '"AOGcRyZmPlNEENGE_yI7XOs",' has no match in directories.
+404 Item: '"0 The House That Herman Built' has no match in directories.
