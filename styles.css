@@ -1,4 +1,4 @@
-/* General Styles */
+General Styles
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -55,6 +55,16 @@ body {
   button:hover {
     background-color: #005f99;
   }
+  #year-indicator {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
   
   /* Modal Styles */
   #modal {
@@ -93,3 +103,110 @@ body {
     list-style: none;
     margin: 5px 0;
   }
+  /* New styles and overrides */
+  /* General Styles */
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden; /* Prevent native scrolling */
+}
+
+#vine-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  height: 100vh;
+  position: relative;
+}
+
+#vine-line {
+  display: flex;
+  flex-direction: row; /* Horizontal alignment */
+  gap: 100px; /* Adjust spacing between year sections */
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.year-section {
+  flex: 0 0 100%; /* Full screen width for each year */
+  display: flex;
+  flex-direction: row; /* Align parents horizontally */
+  justify-content: space-between;
+  align-items: center;
+  scroll-snap-align: start;
+  position: relative;
+  height: 100%;
+}
+
+.parent-vine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.project {
+  width: 200px;
+  height: 200px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.project img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Vine SVG Connections */
+.vine-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1; /* Ensure the vine stays behind the projects */
+}
+
+#nav-buttons {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #005f99;
+}
+
+/* Year Display */
+#year-display {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4rem;
+  color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
