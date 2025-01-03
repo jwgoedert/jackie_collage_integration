@@ -3,6 +3,7 @@ const vineLine = document.getElementById("vine-line");
 const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modal-title");
 const modalDateLocation = document.getElementById("modal-date-location");
+const modalParentVine = document.getElementById("modal-parent-vine");
 const modalDescription = document.getElementById("modal-description");
 const gallery = document.getElementById("gallery");
 const relatedProjects = document.getElementById("related-projects");
@@ -24,11 +25,29 @@ fetch("data/projects.json")
   .catch(err => console.error("Error fetching JSON:", err));
 
 function renderProjects(projects) {
-  const parentVineColors = {
-    "1-Main Vine": "#006400",
-    "2-Second Vine": "#228B22",
-    "3-Third Vine": "#32CD32",
-  };
+  // Get all parent vines to reference for below color mapping
+  const parentVines = projects.reduce((vines, project) => {
+    if (!vines.includes(project["Parent Vine"])) vines.push(project["Parent Vine"]);
+    return vines;
+  }, []);
+  console.log('parentVines', parentVines);
+  
+  // Define green colors for each parent vine from parentVines array
+  const parentVineColors = parentVines.reduce((colors, vine) => {
+    const vineNumber = parseInt(vine.match(/\d+/), 10) || 0;
+    const hue = 120; // Green hue
+    const lightness = 30 + (vineNumber * 10) % 50; // Vary lightness between 30% and 80%
+    colors[vine] = `hsl(${hue}, 50%, ${lightness}%)`;
+    return colors;
+  }, {});
+  console.log('parentVineColors', parentVineColors);
+
+  // Plug in specific colors for next iteration
+  // const parentVineColors = {
+  //   "1-Main Vine": "#006400",
+  //   "2- Main Vine - Herman's House": "#acd8a7",
+  //   "3-Third Vine": "#32CD32",
+  // };
 
   years = [...new Set(projects.map(p => Math.floor(p.Date || 0)))].sort();
 
@@ -41,7 +60,7 @@ function renderProjects(projects) {
     Object.keys(parentGroups).forEach(parentVine => {
       const parentDiv = document.createElement("div");
       parentDiv.classList.add("parent-vine");
-      parentDiv.style.border = `2px solid ${parentVineColors[parentVine] || "#ccc"}`;
+      parentDiv.style.border = `10px solid ${parentVineColors[parentVine] || "#ccc"}`;
 
       parentGroups[parentVine].forEach(project => {
         const projectDiv = document.createElement("div");
@@ -117,6 +136,7 @@ function openModal(project, folderPath) {
   modalDateLocation.textContent = `${project.Date || "Unknown"} - ${
     project["Location(s)"] || "Unknown"
   }`;
+  modalParentVine.textContent = project["Parent Vine"] || "Other";
   modalDescription.textContent = project.Description || "No description available.";
 
   gallery.innerHTML = "";
