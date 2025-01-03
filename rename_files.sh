@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Rename files in directories after directory parent folder name
 # Base directory containing converted_collages
 base_dir=~/work_hub/jackie_sumell/jackie_sumell_web/jackie_collage_integration/data/converted_collages
 

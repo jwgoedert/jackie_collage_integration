@@ -30,7 +30,7 @@ function renderProjects(projects) {
     projectDiv.classList.add("project");
 
     const image = document.createElement("img");
-    image.src = `${folderPath}/${normalizedName}-0.png`; // Default to the first layer
+    image.src = `${folderPath}/${year} ${normalizedName}_collage-0.png`; // Default to the first layer
     image.alt = project.Name;
     // image.onerror = () => (image.src = "assets/placeholder.png");
 
@@ -47,10 +47,10 @@ function renderProjects(projects) {
 
 function normalizeName(name) {
   return name
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
+    // .toLowerCase()
+    // .replace(/[^a-z0-9\s]/g, "")
+    // .replace(/\s+/g, " ")
+    // .trim();
 }
 
 function openModal(project, folderPath) {
