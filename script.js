@@ -102,26 +102,50 @@ function drawVines() {
   vineSvg.classList.add("vine-svg");
   vineLine.appendChild(vineSvg);
 
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  line.setAttribute("x1", 0);
+  line.setAttribute("y1", vineContainer.offsetHeight / 2);
+  line.setAttribute("x2", vineContainer.offsetWidth);
+  line.setAttribute("y2", vineContainer.offsetHeight / 2 + 50);
+  line.setAttribute("stroke", "black");
+  line.setAttribute("stroke-width", "2");
+  vineSvg.appendChild(line);
+
   document.querySelectorAll(".parent-vine").forEach(parentDiv => {
     const projects = parentDiv.querySelectorAll(".project");
 
-    projects.forEach((project, index) => {
-      if (index < projects.length - 1) {
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        const rect1 = project.getBoundingClientRect();
-        const rect2 = projects[index + 1].getBoundingClientRect();
+  //   projects.forEach((project, index) => {
+  //     if (index < projects.length - 1) {
+  //       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  //       const rect1 = project.getBoundingClientRect();
+  //       const rect2 = projects[index + 1].getBoundingClientRect();
 
-        line.setAttribute("x1", rect1.x + rect1.width / 2);
-        line.setAttribute("y1", rect1.y + rect1.height / 2);
-        line.setAttribute("x2", rect2.x + rect2.width / 2);
-        line.setAttribute("y2", rect2.y + rect2.height / 2);
-        line.setAttribute("stroke", "#228B22");
-        line.setAttribute("stroke-width", "2");
+  //       line.setAttribute("x1", rect1.x + rect1.width / 2);
+  //       line.setAttribute("y1", rect1.y + rect1.height / 2);
+  //       line.setAttribute("x2", rect2.x + rect2.width / 2);
+  //       line.setAttribute("y2", rect2.y + rect2.height / 2);
+  //       line.setAttribute("stroke", "#228B22");
+  //       line.setAttribute("stroke-width", "2");
 
-        vineSvg.appendChild(line);
-      }
-    });
+  //       vineSvg.appendChild(line);
+  //     }
+  //   });
+  // });
+  projects.forEach((project, index) => {
+    if (index < projects.length - 1) {
+      const nextProject = projects[index + 1];
+      // const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      // line.setAttribute("x1", project.offsetLeft + project.offsetWidth / 2);
+      // line.setAttribute("y1", project.offsetTop + project.offsetHeight / 2);
+      // line.setAttribute("x2", nextProject.offsetLeft + nextProject.offsetWidth / 2);
+      // line.setAttribute("y2", nextProject.offsetTop + nextProject.offsetHeight / 2);
+      // line.setAttribute("stroke", "black");
+      // line.setAttribute("stroke-width", "2");
+      // vineSvg.appendChild(line);
+    }
   });
+
+});
 }
 
 function normalizeName(name) {
