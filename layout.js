@@ -2,6 +2,7 @@ let vineLength = 0;
 const vineContainer = document.getElementById("vine-container");
 const vineLine = document.querySelector("vine-line");
 const viewWidth = window.innerWidth;
+const viewHeight = window.innerHeight;
 
 const basePath = "data/converted_collages";
 let years = [];
@@ -118,7 +119,7 @@ function renderProjectNodes(projects) {
   const nodeSvg = document.createElementNS(svgNamespace, "svg");
   nodeSvg.style.position = "absolute";
   nodeSvg.style.width = "100%";
-  nodeSvg.style.height = "500"; // Adjust height as needed
+  nodeSvg.style.height = viewHeight; // Adjust height as needed
   nodeSvg.style.top = "0"; // Ensure it stays at the top
   // nodeSvg.setAttribute("viewBox", `0 0 ${window.innerWidth} 100`);
   nodeSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
@@ -131,24 +132,34 @@ function renderProjectNodes(projects) {
 
 
   Object.keys(projects).forEach(year => {
-    Object.keys(projects[year]).forEach(parentVine => {
+    Object.keys(projects[year]).forEach((parentVine, parentIndex) => {
       //set variable to yearIndex
       let yearIndex = projects[year].yearIndex;
       if (parentVine !== 'yearIndex') {
         let widthDivisor = Object.keys(projects[year][parentVine]).length + 1;
         let widthMultiplier = viewWidth / widthDivisor;
-
+        let heightDivisor = Object.keys(projects[year]).length;// do not have to add 1 since there is an object for yearIndex
+        let heightMultiplier = viewHeight / heightDivisor;
+        console.log('widthDivisor', widthDivisor, 'widthMultiplier', widthMultiplier, 'heightMultiplier', heightMultiplier, 'viewHeight', viewHeight, 'heightDivisor', heightDivisor);
+        let nodeY = (parentIndex + 1)  * heightMultiplier;
+        console.log('nodeY', nodeY);
         projects[year][parentVine].forEach((project, index) => {
+          console.log('project-rendered', project);
           const nodeX = (index + 1) * widthMultiplier + yearIndex * viewWidth;
-          drawEllipse(nodeX, 100, 50, "#056608", nodeSvg);
-          console.log('project from render node', project);
+          // drawEllipse(nodeX, nodeY, 10 * (index +1), "#056608", nodeSvg);
+          drawEllipse(nodeX, nodeY, 50, "#056608", nodeSvg);
+          // drawEllipse(nodeX, nodeY + heightMultiplier, 50, "#52C755", nodeSvg);
+
+          // console.log('project from render node', project);
         });
       }
     });
+    const vineContainer = document.getElementById("vine-container");
+    vineContainer.appendChild(nodeSvg);
   });
-  const vineContainer = document.getElementById("vine-container");
-  vineContainer.appendChild(nodeSvg);
 }
+
+
 function drawEllipse(xPos, yPos, radius, fill, appendToElement) {
   const svgNamespace = "http://www.w3.org/2000/svg";
 
@@ -158,7 +169,7 @@ function drawEllipse(xPos, yPos, radius, fill, appendToElement) {
   ellipse.setAttribute("rx", radius); // Horizontal radius
   ellipse.setAttribute("ry", radius); // Vertical radius
   ellipse.setAttribute("fill", fill); // Fill color
-  ellipse.setAttribute("fill-opacity", "1"); // Fill color
+  ellipse.setAttribute("fill-opacity", ".25"); // Fill color
   // Add the ellipse to the SVG
   appendToElement.appendChild(ellipse);
 }
