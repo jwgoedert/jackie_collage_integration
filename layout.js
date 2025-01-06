@@ -126,6 +126,19 @@ function renderProjectNodes(projects) {
     vineContainer.appendChild(projectNode);
   });
 }
+function drawEllipse(xPos, yPos, radius, fill, appendToElement) {
+  const svgNamespace = "http://www.w3.org/2000/svg";
+
+  const ellipse = document.createElementNS(svgNamespace, "ellipse");
+  ellipse.setAttribute("cx", xPos); // Center horizontally
+  ellipse.setAttribute("cy", yPos); // Center vertically
+  ellipse.setAttribute("rx", radius); // Horizontal radius
+  ellipse.setAttribute("ry", radius); // Vertical radius
+  ellipse.setAttribute("fill", fill); // Fill color
+  ellipse.setAttribute("fill-opacity", "1"); // Fill color
+  // Add the ellipse to the SVG
+  appendToElement.appendChild(ellipse);
+}
 function drawHorizontalLine() {
   const svgNamespace = "http://www.w3.org/2000/svg";
 
@@ -153,6 +166,18 @@ function drawHorizontalLine() {
   line.setAttribute("y2", "450"); // Same vertical position
   line.setAttribute("stroke", "black");
   line.setAttribute("stroke-width", "2");
+  // Create the ellipse element
+  drawEllipse("10%","10%","50","#056608", vineSvg);
+  const ellipse = document.createElementNS(svgNamespace, "ellipse");
+  ellipse.setAttribute("cx", "50%"); // Center horizontally
+  ellipse.setAttribute("cy", "50%"); // Center vertically
+  ellipse.setAttribute("rx", "50"); // Horizontal radius
+  ellipse.setAttribute("ry", "25"); // Vertical radius
+  ellipse.setAttribute("fill", "blue"); // Fill color
+
+  // Add the ellipse to the SVG
+  vineSvg.appendChild(ellipse);
+
 
   // Add the line to the SVG
   vineSvg.appendChild(line);
