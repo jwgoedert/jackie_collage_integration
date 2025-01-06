@@ -21,6 +21,7 @@ function renderProjects(projects) {
   console.log('yearCount', getYearCount(projects));
   console.log('sortProjects', sortProjects(projects));
   console.log('vineNodeData', setVineNodeData(projects));
+  renderProjectNodes(setVineNodeData(projects));
   console.log('parentVines', groupByParentVine(projects));
   console.log('vineCountByYear', getVineCountByYear(projects));
   console.log('uniqueParentVineCountByYear', getUniqueParentVineCountByYear(projects));
@@ -39,7 +40,6 @@ function setVineNodeData(projects) {
     vineData[project.Date][project["Parent Vine"]].push(project);
     return vineData;
   }, {});
-
   // Add numeric index by year
   const years = Object.keys(vineData).sort();
   years.forEach((year, index) => {
@@ -114,17 +114,40 @@ function calculateNodePosition(nodeObject) {
 }
 
 function renderProjectNodes(projects) {
-  projects.forEach(project => {
-    const projectCount = getUniqueParentVineCountByYear(projects);
-    // const projectCount = getUniqueParentVineCountByYear(projects)[project.Date].size;
-    const projectNode = document.createElement("div");
-    projectNode.classList.add("project-node");
-    projectNode.style.left = `${project.Date * 100}vw`;
-    if (projectCount[project.Date]) {
-      projectNode.style.width = `${100 / projectCount[project.Date]}vw`;
-    }
-    vineContainer.appendChild(projectNode);
+  const svgNamespace = "http://www.w3.org/2000/svg";
+  const nodeSvg = document.createElementNS(svgNamespace, "svg");
+  nodeSvg.style.position = "absolute";
+  nodeSvg.style.width = "100%";
+  nodeSvg.style.height = "500"; // Adjust height as needed
+  nodeSvg.style.top = "0"; // Ensure it stays at the top
+  // nodeSvg.setAttribute("viewBox", `0 0 ${window.innerWidth} 100`);
+  nodeSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  nodeSvg.id = "node-svg"; // Add an ID to prevent duplicates
+
+  // Check if the SVG already exists to avoid duplication
+  if (document.getElementById("node-svg")) {
+    return;
+  }
+
+
+  Object.keys(projects).forEach(year => {
+    Object.keys(projects[year]).forEach(parentVine => {
+      //set variable to yearIndex
+      let yearIndex = projects[year].yearIndex;
+      if (parentVine !== 'yearIndex') {
+        let widthDivisor = Object.keys(projects[year][parentVine]).length + 1;
+        let widthMultiplier = viewWidth / widthDivisor;
+
+        projects[year][parentVine].forEach((project, index) => {
+          const nodeX = (index + 1) * widthMultiplier + yearIndex * viewWidth;
+          drawEllipse(nodeX, 100, 50, "#056608", nodeSvg);
+          console.log('project from render node', project);
+        });
+      }
+    });
   });
+  const vineContainer = document.getElementById("vine-container");
+  vineContainer.appendChild(nodeSvg);
 }
 function drawEllipse(xPos, yPos, radius, fill, appendToElement) {
   const svgNamespace = "http://www.w3.org/2000/svg";
@@ -168,17 +191,6 @@ function drawHorizontalLine() {
   line.setAttribute("stroke-width", "2");
   // Create the ellipse element
   drawEllipse("10%","10%","50","#056608", vineSvg);
-  const ellipse = document.createElementNS(svgNamespace, "ellipse");
-  ellipse.setAttribute("cx", "50%"); // Center horizontally
-  ellipse.setAttribute("cy", "50%"); // Center vertically
-  ellipse.setAttribute("rx", "50"); // Horizontal radius
-  ellipse.setAttribute("ry", "25"); // Vertical radius
-  ellipse.setAttribute("fill", "blue"); // Fill color
-
-  // Add the ellipse to the SVG
-  vineSvg.appendChild(ellipse);
-
-
   // Add the line to the SVG
   vineSvg.appendChild(line);
 
