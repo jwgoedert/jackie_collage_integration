@@ -119,14 +119,14 @@ function renderProjectNodes(svgElement, vineData) {
 
           const imgElement = document.createElementNS(svgNamespace, "image");
           imgElement.setAttribute("href", imagePath);
-          imgElement.setAttribute("x", nodeX - 100); // Center horizontally
-          imgElement.setAttribute("y", nodeY - 100); // Center vertically
-          imgElement.setAttribute("width", "200");
-          imgElement.setAttribute("height", "200");
+          imgElement.setAttribute("x", nodeX - 200); // Center horizontally
+          imgElement.setAttribute("y", nodeY - 200); // Center vertically
+          imgElement.setAttribute("width", "400");
+          imgElement.setAttribute("height", "400");
 
           // Fallback if the image fails to load
           imgElement.onerror = () => {
-            imgElement.setAttribute("href", "fallback-image.png"); // Use a placeholder image
+            imgElement.setAttribute("href", "data/fallback-image.svg"); // Use a placeholder image
           };
 
           svgElement.appendChild(imgElement);
