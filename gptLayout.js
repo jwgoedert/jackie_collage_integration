@@ -126,7 +126,7 @@ function renderProjectNodes(svgElement, vineData) {
 
           // Fallback if the image fails to load
           imgElement.onerror = () => {
-            imgElement.setAttribute("href", "data/fallback-image.svg"); // Use a placeholder image
+            imgElement.setAttribute("href", "/data/fallback-image.svg"); // Use a placeholder image
           };
 
           svgElement.appendChild(imgElement);
