@@ -93,6 +93,23 @@ body {
     /* max-width: 800px; */
     text-align: center;
   }
+  #modal-columns {
+    display: flex;
+    justify-content: space-between;
+  }
+  #modal-column-left {
+    flex: 1;
+    margin-right: 10px;
+  }
+  #modal-column-right {
+    flex: 1;
+    margin-left: 10px;
+  }
+  #related-projects {
+    margin-top: 20px;
+    text-align: left;
+    min-height: 50vh;
+  }
   
   #gallery img {
     margin: 10px;
