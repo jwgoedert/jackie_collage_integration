@@ -3,6 +3,7 @@ const vineLine = document.getElementById("vine-line");
 const viewWidth = window.innerWidth;
 const viewHeight = window.innerHeight;
 const svgNamespace = "http://www.w3.org/2000/svg";
+let nodeSize = 300;
 
 const basePath = "data/converted_collages";
 let years = [];
@@ -119,10 +120,10 @@ function renderProjectNodes(svgElement, vineData) {
 
           const imgElement = document.createElementNS(svgNamespace, "image");
           imgElement.setAttribute("href", imagePath);
-          imgElement.setAttribute("x", nodeX - 200); // Center horizontally
-          imgElement.setAttribute("y", nodeY - 200); // Center vertically
-          imgElement.setAttribute("width", "400");
-          imgElement.setAttribute("height", "400");
+          imgElement.setAttribute("x", nodeX - (nodeSize/2)); // Center horizontally
+          imgElement.setAttribute("y", nodeY - (nodeSize/2)); // Center vertically
+          imgElement.setAttribute("width", nodeSize);
+          imgElement.setAttribute("height", nodeSize);
 
           // Fallback if the image fails to load
           imgElement.onerror = () => {
