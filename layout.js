@@ -71,8 +71,8 @@ function renderProjectNodes(projects) {
   const nodeSvg = document.createElementNS(svgNamespace, "svg");
   nodeSvg.style.position = "absolute";
   nodeSvg.style.width = "100%";
-  nodeSvg.style.height = viewHeight; // Adjust height as needed
-  nodeSvg.style.top = "0"; // Ensure it stays at the top
+  nodeSvg.style.height = `${viewHeight}px`;
+  nodeSvg.style.top = "0";
   nodeSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
   nodeSvg.id = "node-svg";
 
@@ -84,9 +84,10 @@ function renderProjectNodes(projects) {
     "#004d00", "#006600", "#008000", "#009900", "#00b300", "#00cc00", "#00e600", "#00ff00", "#1aff1a"
   ];
 
+  let globalParentVineCoords = {}; // Persist coordinates of the last node for each parent vine
+
   Object.keys(projects).forEach(year => {
     let yearIndex = projects[year].yearIndex;
-    let parentVineCoords = {}; // Store the last node coordinates for each parent vine
 
     Object.keys(projects[year]).forEach((parentVine, parentIndex) => {
       if (parentVine !== 'yearIndex') {
@@ -102,21 +103,21 @@ function renderProjectNodes(projects) {
           // Draw ellipse for the project node
           drawEllipse(nodeX, nodeY, 50, greenColors[parentIndex % greenColors.length], nodeSvg);
 
-          // Connect nodes within the same Parent Vine
-          if (parentVineCoords[parentVine]) {
+          // Connect nodes within the same Parent Vine across years
+          if (globalParentVineCoords[parentVine]) {
             drawLine(
-              parentVineCoords[parentVine].x,
-              parentVineCoords[parentVine].y,
+              globalParentVineCoords[parentVine].x,
+              globalParentVineCoords[parentVine].y,
               nodeX,
               nodeY,
-              "green",
+              greenColors[parentIndex % greenColors.length],
               2,
               nodeSvg
             );
           }
 
-          // Update the last known coordinates for this parent vine
-          parentVineCoords[parentVine] = { x: nodeX, y: nodeY };
+          // Update the global coordinates for this parent vine
+          globalParentVineCoords[parentVine] = { x: nodeX, y: nodeY };
         });
       }
     });
