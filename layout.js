@@ -103,9 +103,9 @@ function renderProjectNodes(projects) {
           // Draw ellipse for the project node
           drawEllipse(nodeX, nodeY, 50, greenColors[parentIndex % greenColors.length], nodeSvg);
 
-          // Connect nodes within the same Parent Vine across years
+          // Connect nodes within the same Parent Vine across years using Bézier curves
           if (globalParentVineCoords[parentVine]) {
-            drawLine(
+            drawBezierCurve(
               globalParentVineCoords[parentVine].x,
               globalParentVineCoords[parentVine].y,
               nodeX,
@@ -147,4 +147,24 @@ function drawLine(x1, y1, x2, y2, stroke, strokeWidth, appendToElement) {
   line.setAttribute("stroke-width", strokeWidth);
   // Add the line to the SVG
   appendToElement.appendChild(line);
+}
+
+function drawBezierCurve(x1, y1, x2, y2, stroke, strokeWidth, appendToElement) {
+  const path = document.createElementNS(svgNamespace, "path");
+
+  // Calculate control points for a smooth curve
+  const controlX1 = x1 + (x2 - x1) / 3; // First control point closer to x1
+  const controlY1 = y1; // Keep the same vertical alignment as the start point
+  const controlX2 = x1 + (2 * (x2 - x1)) / 3; // Second control point closer to x2
+  const controlY2 = y2; // Keep the same vertical alignment as the end point
+
+  // Create the Bézier curve path
+  const pathData = `M ${x1} ${y1} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${x2} ${y2}`;
+  path.setAttribute("d", pathData);
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", stroke);
+  path.setAttribute("stroke-width", strokeWidth);
+
+  // Add the path to the SVG
+  appendToElement.appendChild(path);
 }
