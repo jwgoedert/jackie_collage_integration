@@ -31,7 +31,7 @@ function renderProjects(projects) {
     return vines;
   }, []);
   console.log('parentVines', parentVines);
-  
+
   // Define green colors for each parent vine from parentVines array
   const parentVineColors = parentVines.reduce((colors, vine) => {
     const vineNumber = parseInt(vine.match(/\d+/), 10) || 0;
@@ -100,53 +100,51 @@ function groupByParentVine(projects) {
 function drawVines() {
   const vineSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   vineSvg.classList.add("vine-svg");
-  vineLine.appendChild(vineSvg);
 
-  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  line.setAttribute("x1", 0);
-  line.setAttribute("y1", vineContainer.offsetHeight / 2);
-  line.setAttribute("x2", vineContainer.offsetWidth);
-  line.setAttribute("y2", vineContainer.offsetHeight / 2 + 50);
-  line.setAttribute("stroke", "black");
-  line.setAttribute("stroke-width", "2");
-  vineSvg.appendChild(line);
+  // Calculate the total width of the projects
+  const totalWidth = Array.from(document.querySelectorAll(".year-section"))
+    .reduce((width, section) => width + section.scrollWidth, 0);
+
+  vineSvg.setAttribute("width", totalWidth);
+  vineSvg.setAttribute("height", vineContainer.scrollHeight);
+  vineLine.appendChild(vineSvg);
 
   document.querySelectorAll(".parent-vine").forEach(parentDiv => {
     const projects = parentDiv.querySelectorAll(".project");
 
-  //   projects.forEach((project, index) => {
-  //     if (index < projects.length - 1) {
-  //       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  //       const rect1 = project.getBoundingClientRect();
-  //       const rect2 = projects[index + 1].getBoundingClientRect();
+    projects.forEach((project, index) => {
+      console.log('project', project);
+      if (index < projects.length - 1) {
+        const nextProject = projects[index + 1];
+        const startX = project.offsetLeft + project.offsetWidth / 2;
+        const startY = project.offsetTop + project.offsetHeight / 2;
+        const endX = nextProject.offsetLeft + nextProject.offsetWidth / 2;
+        const endY = nextProject.offsetTop + nextProject.offsetHeight / 2;
+        console.log('startX', startX, 'startY', startY, 'endX', endX, 'endY', endY);
+        console.log('project', project, 'nextProject', nextProject);
+        console.log('project', project.offsetLeft, project.offsetWidth, project.offsetTop, project.offsetHeight, 'nextProject', nextProject);
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        // const d = `M ${startX},${startY} C ${startX + 100},${startY} ${endX - 100},${endY} ${endX},${endY}`;
+        const d = `M ${startX},${startY} C ${startX + 100},${startY} ${endX - 100},${endY} ${endX},${endY}`;
+        path.setAttribute("d", d);
+        path.setAttribute("stroke", "green");
+        path.setAttribute("stroke-width", "2");
+        path.setAttribute("fill", "none");
 
-  //       line.setAttribute("x1", rect1.x + rect1.width / 2);
-  //       line.setAttribute("y1", rect1.y + rect1.height / 2);
-  //       line.setAttribute("x2", rect2.x + rect2.width / 2);
-  //       line.setAttribute("y2", rect2.y + rect2.height / 2);
-  //       line.setAttribute("stroke", "#228B22");
-  //       line.setAttribute("stroke-width", "2");
-
-  //       vineSvg.appendChild(line);
-  //     }
-  //   });
-  // });
-  projects.forEach((project, index) => {
-    if (index < projects.length - 1) {
-      const nextProject = projects[index + 1];
-      // const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      // line.setAttribute("x1", project.offsetLeft + project.offsetWidth / 2);
-      // line.setAttribute("y1", project.offsetTop + project.offsetHeight / 2);
-      // line.setAttribute("x2", nextProject.offsetLeft + nextProject.offsetWidth / 2);
-      // line.setAttribute("y2", nextProject.offsetTop + nextProject.offsetHeight / 2);
-      // line.setAttribute("stroke", "black");
-      // line.setAttribute("stroke-width", "2");
-      // vineSvg.appendChild(line);
-    }
+        vineSvg.appendChild(path);
+      }
+    });
   });
-
-});
 }
+
+// Call drawVines after rendering projects
+fetch("data/projects.json")
+  .then(response => response.json())
+  .then(projects => {
+    renderProjects(projects);
+    drawVines(); // Ensure drawVines is called after projects are rendered
+  })
+  .catch(err => console.error("Error fetching JSON:", err));
 
 function normalizeName(name) {
   return name
@@ -157,9 +155,8 @@ function normalizeName(name) {
 
 function openModal(project, folderPath) {
   modalTitle.textContent = project.Name;
-  modalDateLocation.textContent = `${project.Date || "Unknown"} - ${
-    project["Location(s)"] || "Unknown"
-  }`;
+  modalDateLocation.textContent = `${project.Date || "Unknown"} - ${project["Location(s)"] || "Unknown"
+    }`;
   modalParentVine.textContent = project["Parent Vine"] || "Other";
   modalDescription.textContent = project.Description || "No description available.";
 

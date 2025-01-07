@@ -1,0 +1,24 @@
+# macOS system files
+.DS_Store
+.DS_Store?
+
+# Image files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.svg
+*.ico
+*.bmp
+*.tiff
+*.JPG
+*.JPEG
+*.PNG
+*.GIF
+*.WEBP
+*.SVG
+*.ICO
+*.BMP
+*.TIFF
+
