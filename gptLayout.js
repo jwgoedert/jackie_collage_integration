@@ -130,6 +130,17 @@ function renderProjectNodes(svgElement, vineData) {
             imgElement.setAttribute("href", "/data/fallback-image.svg"); // Use a placeholder image
           };
 
+          // Add hover effect
+          imgElement.addEventListener("mouseover", () => {
+            imgElement.setAttribute("opacity", "0.8");
+          });
+          imgElement.addEventListener("mouseout", () => {
+            imgElement.setAttribute("opacity", "1");
+          });
+
+          // Add click handler to open modal
+          imgElement.addEventListener("click", () => openModal(project));
+
           svgElement.appendChild(imgElement);
         });
       }
@@ -154,6 +165,45 @@ function drawBezierCurve(x1, y1, x2, y2, stroke, strokeWidth, appendToElement) {
 
   appendToElement.appendChild(path);
 }
+
+function openModal(project) {
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDateLocation = document.getElementById("modal-date-location");
+  const modalParentVine = document.getElementById("modal-parent-vine");
+  const modalDescription = document.getElementById("modal-description");
+  const gallery = document.getElementById("gallery");
+  const relatedProjects = document.getElementById("related-projects");
+
+  modalTitle.textContent = project.Name;
+  modalDateLocation.textContent = `${project.Date || "Unknown"} - ${project["Location(s)"] || "Unknown"}`;
+  modalParentVine.textContent = project["Parent Vine"];
+  modalDescription.textContent = project.Description || "No description available.";
+
+  gallery.innerHTML = "";
+  relatedProjects.innerHTML = "";
+
+  for (let i = 0; i < 7; i++) {
+    const img = document.createElement("img");
+    let imgFileName = `${project.Date} ${normalizeName(project.Name)}_collage-${i}.png`;
+    img.src = `${basePath}/${project.Date} ${normalizeName(project.Name)}_collage/${imgFileName}`;
+    img.alt = `${project.Name} Layer ${i}`;
+    img.onerror = () => (img.style.display = "none");
+    gallery.appendChild(img);
+  }
+
+  project["Collaborators"].forEach(collaborator => {
+    const li = document.createElement("li");
+    li.textContent = collaborator;
+    relatedProjects.appendChild(li);
+  });
+
+  modal.classList.remove("hidden");
+}
+
+document.getElementById("modal-close").addEventListener("click", () => {
+  document.getElementById("modal").classList.add("hidden");
+});
 
 function normalizeName(name) {
   return name
