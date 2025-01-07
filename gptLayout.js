@@ -1,159 +1,162 @@
-let vineLength = 0;
 const vineContainer = document.getElementById("vine-container");
+const vineLine = document.getElementById("vine-line");
+const viewWidth = window.innerWidth;
+const viewHeight = window.innerHeight;
+const svgNamespace = "http://www.w3.org/2000/svg";
 
 const basePath = "data/converted_collages";
 let years = [];
 let currentYearIndex = 0;
 
-// Fetch and render projects
 fetch("data/projects.json")
-  .then((response) => response.json())
-  .then((projects) => {
-    vineLength = getYearCount(projects);
-    setVineContainerWidth();
-    years = getSortedYears(projects);
-    const vineData = setVineNodeData(projects);
-    renderVines(vineData);
-    renderProjectNodes(projects);
-  })
-  .catch((err) => console.error("Error fetching JSON:", err));
+  .then(response => response.json())
+  .then(projects => renderProjects(projects))
+  .catch(err => console.error("Error fetching JSON:", err));
 
-// Utility to get unique years sorted
-function getSortedYears(projects) {
-  return [...new Set(projects.map((p) => Math.floor(p.Date || 0)))].sort();
+function renderProjects(projects) {
+  setVineContainerWidth(projects);
+
+  // Step 1: Render the SVG container and paths
+  const svgElement = renderVineSvg(setVineNodeData(projects));
+
+  // Step 2: Render the project nodes (collages/images)
+  renderProjectNodes(svgElement, setVineNodeData(projects));
+
+  console.log("Vine rendering complete.");
 }
 
-// Calculate vine container width
-function setVineContainerWidth() {
-  vineContainer.style.width = `${vineLength * 100}vw`;
+function setVineContainerWidth(projects) {
+  let vineLength = [...new Set(projects.map(p => Math.floor(p.Date || 0)))].sort().length;
+  vineContainer.style.width = `${vineLength * 100 || 1}vw`;
 }
 
-// Generate structured vine data by year and parent vine
 function setVineNodeData(projects) {
-  return projects.reduce((vineData, project) => {
-    const year = Math.floor(project.Date);
-    if (!vineData[year]) vineData[year] = {};
-    if (!vineData[year][project["Parent Vine"]]) {
-      vineData[year][project["Parent Vine"]] = [];
-    }
-    vineData[year][project["Parent Vine"]].push(project);
+  const vineData = projects.reduce((vineData, project) => {
+    if (!vineData[project.Date]) vineData[project.Date] = {};
+    if (!vineData[project.Date][project["Parent Vine"]]) vineData[project.Date][project["Parent Vine"]] = [];
+    vineData[project.Date][project["Parent Vine"]].push(project);
     return vineData;
   }, {});
+  
+  const years = Object.keys(vineData).sort();
+  years.forEach((year, index) => {
+    vineData[year].yearIndex = index;
+  });
+
+  return vineData;
 }
 
-// Render vines as SVG paths
-function renderVines(vineData) {
-  const svgNamespace = "http://www.w3.org/2000/svg";
+function renderVineSvg(vineData) {
+  const svgElement = document.createElementNS(svgNamespace, "svg");
+  svgElement.setAttribute("width", "100%");
+  svgElement.setAttribute("height", `${viewHeight}px`);
+  svgElement.style.position = "absolute";
+  svgElement.style.top = "0";
+  svgElement.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  svgElement.id = "vine-svg";
 
-  years.forEach((year, yearIndex) => {
-    const yearProjects = vineData[year];
-    if (!yearProjects) return;
+  if (document.getElementById("vine-svg")) {
+    return document.getElementById("vine-svg");
+  }
 
-    Object.entries(yearProjects).forEach(([parentVine, projects], parentIndex) => {
-      const vineSvg = document.createElementNS(svgNamespace, "svg");
-      vineSvg.classList.add("vine-svg");
-      vineSvg.style.position = "absolute";
-      vineSvg.style.width = "100%";
-      vineSvg.style.height = "100%";
-      vineSvg.setAttribute("viewBox", `0 0 ${vineContainer.offsetWidth} ${vineContainer.offsetHeight}`);
-      vineSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  const greenColors = [
+    "#004d00", "#006600", "#008000", "#009900", "#00b300", "#00cc00", "#00e600", "#00ff00", "#1aff1a"
+  ];
 
-      const path = document.createElementNS(svgNamespace, "path");
-      path.setAttribute("fill", "none");
-      path.setAttribute(
-        "stroke",
-        `hsl(${(parentIndex / Object.keys(yearProjects).length) * 360}, 100%, 50%)`
-      );
-      path.setAttribute("stroke-width", "2");
+  let globalParentVineCoords = {};
 
-      let pathData = "";
-      projects.forEach((project, projectIndex) => {
-        const position = calculateNodePosition({
-          yearIndex,
-          parentIndex,
-          totalParents: Object.keys(yearProjects).length,
-          nodeIndex: projectIndex,
-          totalNodes: projects.length,
-        });
+  Object.keys(vineData).forEach(year => {
+    let yearIndex = vineData[year].yearIndex;
 
-        if (projectIndex === 0) {
-          pathData += `M ${position.x} ${position.y} `;
-        } else {
-          const prevPosition = calculateNodePosition({
-            yearIndex,
-            parentIndex,
-            totalParents: Object.keys(yearProjects).length,
-            nodeIndex: projectIndex - 1,
-            totalNodes: projects.length,
-          });
+    Object.keys(vineData[year]).forEach((parentVine, parentIndex) => {
+      if (parentVine !== "yearIndex") {
+        let heightDivisor = Object.keys(vineData[year]).length;
+        let heightMultiplier = viewHeight / heightDivisor;
+        let nodeY = (parentIndex + 1) * heightMultiplier;
 
-          const controlPointX = (prevPosition.x + position.x) / 2;
-          pathData += `Q ${controlPointX},${prevPosition.y} ${position.x},${position.y} `;
-        }
-      });
+        vineData[year][parentVine].forEach((project, index) => {
+          const nodeX = (index + 1) * (viewWidth / vineData[year][parentVine].length) + yearIndex * viewWidth;
 
-      if (!pathData) {
-        console.error("Path data generation issue:", {
-          year,
-          parentVine,
-          projects,
-          pathData,
+          // Draw Bézier curve for connecting vines
+          if (globalParentVineCoords[parentVine]) {
+            drawBezierCurve(
+              globalParentVineCoords[parentVine].x,
+              globalParentVineCoords[parentVine].y,
+              nodeX,
+              nodeY,
+              greenColors[parentIndex % greenColors.length],
+              2,
+              svgElement
+            );
+          }
+
+          // Update the global coordinates for this parent vine
+          globalParentVineCoords[parentVine] = { x: nodeX, y: nodeY };
         });
       }
+    });
+  });
 
-      path.setAttribute("d", pathData.trim());
-      vineSvg.appendChild(path);
-      vineContainer.appendChild(vineSvg);
+  vineLine.appendChild(svgElement);
+  return svgElement;
+}
+
+function renderProjectNodes(svgElement, vineData) {
+  Object.keys(vineData).forEach(year => {
+    let yearIndex = vineData[year].yearIndex;
+
+    Object.keys(vineData[year]).forEach((parentVine, parentIndex) => {
+      if (parentVine !== "yearIndex") {
+        let heightDivisor = Object.keys(vineData[year]).length;
+        let heightMultiplier = viewHeight / heightDivisor;
+        let nodeY = (parentIndex + 1) * heightMultiplier;
+
+        vineData[year][parentVine].forEach((project, index) => {
+          const nodeX = (index + 1) * (viewWidth / vineData[year][parentVine].length) + yearIndex * viewWidth;
+
+          // Attempt to load the collage for the node
+          const imagePath = `${basePath}/${project.Date} ${normalizeName(project.Name)}_collage/${project.Date} ${normalizeName(project.Name)}_collage-0.png`;
+
+          const imgElement = document.createElementNS(svgNamespace, "image");
+          imgElement.setAttribute("href", imagePath);
+          imgElement.setAttribute("x", nodeX - 100); // Center horizontally
+          imgElement.setAttribute("y", nodeY - 100); // Center vertically
+          imgElement.setAttribute("width", "200");
+          imgElement.setAttribute("height", "200");
+
+          // Fallback if the image fails to load
+          imgElement.onerror = () => {
+            imgElement.setAttribute("href", "fallback-image.png"); // Use a placeholder image
+          };
+
+          svgElement.appendChild(imgElement);
+        });
+      }
     });
   });
 }
 
-// Calculate position for each project node
-function calculateNodePosition({ yearIndex, parentIndex, totalParents, nodeIndex, totalNodes }) {
-  const containerWidth = vineContainer.offsetWidth;
-  const containerHeight = vineContainer.offsetHeight;
+function drawBezierCurve(x1, y1, x2, y2, stroke, strokeWidth, appendToElement) {
+  const path = document.createElementNS(svgNamespace, "path");
 
-  const x =
-    (yearIndex * containerWidth) / vineLength + (nodeIndex / totalNodes) * (containerWidth / vineLength);
-  const y = (containerHeight / (totalParents + 1)) * (parentIndex + 1);
+  // Control points for a smooth curve
+  const controlX1 = x1 + (x2 - x1) / 3;
+  const controlY1 = y1;
+  const controlX2 = x1 + (2 * (x2 - x1)) / 3;
+  const controlY2 = y2;
 
-  return { x, y };
+  const pathData = `M ${x1} ${y1} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${x2} ${y2}`;
+  path.setAttribute("d", pathData);
+  path.setAttribute("stroke", stroke);
+  path.setAttribute("stroke-width", strokeWidth);
+  path.setAttribute("fill", "none");
+
+  appendToElement.appendChild(path);
 }
 
-// Render project nodes
-function renderProjectNodes(projects) {
-  projects.forEach((project) => {
-    const projectNode = document.createElement("div");
-    projectNode.classList.add("project-node");
-    projectNode.style.position = "absolute";
-    const yearIndex = years.indexOf(Math.floor(project.Date));
-
-    if (yearIndex === -1) {
-      console.error(`Year index not found for project:`, project);
-      return;
-    }
-
-    const position = calculateNodePosition({
-      yearIndex,
-      parentIndex: 0, // Assuming base vine for now
-      totalParents: 1, // Assuming base vine for now
-      nodeIndex: 0, // Adjusted in full data setup
-      totalNodes: 1, // Adjusted in full data setup
-    });
-
-    projectNode.style.left = `${position.x}px`;
-    projectNode.style.top = `${position.y}px`;
-
-    const img = document.createElement("img");
-    img.src = `${basePath}/${Math.floor(project.Date)} ${project.Name}_collage/layer-0.png`;
-    img.alt = project.Name;
-    projectNode.appendChild(img);
-
-    vineContainer.appendChild(projectNode);
-  });
-}
-
-// Helper to count years
-function getYearCount(projects) {
-  return [...new Set(projects.map((p) => Math.floor(p.Date || 0)))].length;
+function normalizeName(name) {
+  return name
+    .replace(/[^a-zA-Z0-9\s]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
