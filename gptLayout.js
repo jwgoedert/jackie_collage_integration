@@ -43,7 +43,7 @@ function setVineNodeData(projects) {
   years.forEach((year, index) => {
     vineData[year].yearIndex = index;
   });
-
+  console.log('vineData', vineData);
   return vineData;
 }
 
