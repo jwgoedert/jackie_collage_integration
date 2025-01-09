@@ -20,7 +20,7 @@ function renderProjects(projects) {
 
   // console.log('yearCount', getYearCount(projects));
   // console.log('sortProjects', sortProjects(projects));
-  // console.log('vineNodeData', setVineNodeData(projects));
+  console.log('vineNodeData', setVineNodeData(projects));
   console.log('parentVines', groupByParentVine(projects));
   console.log('uniqueParentVineCountByYear', getUniqueParentVineCountByYear(projects));
 }
