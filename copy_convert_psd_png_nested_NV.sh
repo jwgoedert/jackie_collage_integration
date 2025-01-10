@@ -13,6 +13,14 @@ mkdir -p "$OUTPUT_DIR" || {
 # Define source directory
 SOURCE_DIR="/Users/jwgoedert_t2studio/work_hub/jackie_sumell/collages/dec31CollagesPlayground"
 
+# Log files
+FOUND_FILE="directories_found.txt"
+PROCESSED_FILE="directories_processed.txt"
+
+# Ensure log files exist
+touch "$FOUND_FILE"
+touch "$PROCESSED_FILE"
+
 # Check if source directory exists
 if [ ! -d "$SOURCE_DIR" ]; then
     echo "Error: Source directory does not exist: $SOURCE_DIR" >&2
@@ -21,32 +29,38 @@ fi
 
 echo "Processing source directory: $SOURCE_DIR"
 
-# Process all NV* directories
-find "$SOURCE_DIR" -type d -name "NV*" | while IFS= read -r dir; do
-    echo "Checking directory: $dir"
-    if [ -d "$dir" ] && [ "$(basename "$dir")" != "psd_tests" ]; then
-        # Loop through subdirectories
-        for sub_dir in "$dir"/*/; do
-            echo "Processing subdirectory: $sub_dir"
-            if [ -d "$sub_dir" ]; then
-                # Create corresponding directory in the destination
-                dest_sub_dir="$OUTPUT_DIR/$(basename "$dir")/$(basename "$sub_dir")"
-                echo "Creating destination subdirectory: $dest_sub_dir"
-                mkdir -p "$dest_sub_dir" || {
-                    echo "Error: Failed to create destination subdirectory: $dest_sub_dir" >&2
-                    continue
-                }
+# Find all directories ending with "_collage" and log them
+find "$SOURCE_DIR" -type d -name "*_collage" > "$FOUND_FILE"
 
-                # Find and convert PSD files
-                find "$sub_dir" -type f -name "*.psd" -print0 | while IFS= read -r -d '' psd; do
-                    base=$(basename "$psd" .psd)
-                    echo "Converting $psd to PNG format"
-                    if ! magick -dispose Background "$psd" -layers coalesce "$dest_sub_dir/${base}-%d.png"; then
-                        echo "Error: Failed to convert file: $psd" >&2
-                        continue
-                    fi
-                done
-            fi
-        done
+# Iterate through directories
+while IFS= read -r sub_dir; do
+    # Skip directories already processed
+    if grep -Fxq "$sub_dir" "$PROCESSED_FILE"; then
+        echo "Skipping already processed directory: $sub_dir"
+        continue
     fi
-done
+
+    echo "Processing subdirectory: $sub_dir"
+
+    # Create corresponding directory in the destination
+    dest_sub_dir="$OUTPUT_DIR/$(basename "$(dirname "$sub_dir")")/$(basename "$sub_dir")"
+    echo "Creating destination subdirectory: $dest_sub_dir"
+    mkdir -p "$dest_sub_dir" || {
+        echo "Error: Failed to create destination subdirectory: $dest_sub_dir" >&2
+        continue
+    }
+
+    # Find and convert PSD files, extracting only visible layers
+    find "$sub_dir" -type f -name "*.psd" -print0 | while IFS= read -r -d '' psd; do
+        base=$(basename "$psd" .psd)
+        echo "Converting $psd to PNG format (visible layers only)"
+        if ! magick "$psd" -dispose Background -define psd:ignore-hidden-layers=true -layers coalesce "$dest_sub_dir/${base}-%d.png"; then
+            echo "Error: Failed to convert file: $psd" >&2
+        fi
+    done
+
+    # Log the processed directory
+    echo "$sub_dir" >> "$PROCESSED_FILE"
+done < "$FOUND_FILE"
+
+echo "Script completed. Processed directories are logged in $PROCESSED_FILE"
