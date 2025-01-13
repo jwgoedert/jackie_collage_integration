@@ -18,7 +18,7 @@ function fetchProjects() {
   // setTimeout(() => {
   return fetch(API_URL, {
     headers: {
-      "Authorization": `Bearer ${token}`,
+      // "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   })
@@ -79,8 +79,8 @@ function setVineNodeData(projects) {
       console.log('project', project);
       console.log('project.Date', project.Date);
       if (!vineData[project.Date]) vineData[project.Date] = {};
-      if (!vineData[project.Date][project["Parent Vine"]]) vineData[project.Date][project["Parent Vine"]] = [];
-      vineData[project.Date][project["Parent Vine"]].push(project);
+      if (!vineData[project.Date][project["ParentVine"]]) vineData[project.Date][project["ParentVine"]] = [];
+      vineData[project.Date][project["ParentVine"]].push(project);
       console.log('setVineData', vineData);
       return vineData;
     }, {});
@@ -137,7 +137,7 @@ function renderVineSvg(vineData) {
               );
             }
 
-            // Update the global coordinates for this parent vine
+            // Update the global coordinates for this parentvine
             globalParentVineCoords[parentVine] = { x: nodeX, y: nodeY };
           });
         }
@@ -225,7 +225,7 @@ function openModal(project, projects) {
 
     modalTitle.textContent = project.Name;
     modalDateLocation.textContent = `${project.Date || "Unknown"} - ${project["Location(s)"] || "Unknown"}`;
-    modalParentVine.textContent = project["Parent Vine"];
+    modalParentVine.textContent = project["ParentVine"];
     modalDescription.textContent = project.Description || "No description available.";
 
     gallery.innerHTML = "";
@@ -240,7 +240,7 @@ function openModal(project, projects) {
       gallery.appendChild(img);
     }
 
-    const parentVineProjects = projects.filter(p => p["Parent Vine"] === project["Parent Vine"]);
+    const parentVineProjects = projects.filter(p => p["ParentVine"] === project["ParentVine"]);
 
     parentVineProjects.forEach(p => {
       const li = document.createElement("li");

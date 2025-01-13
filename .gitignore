@@ -1,6 +1,12 @@
 # macOS system files
 .DS_Store
 .DS_Store?
+.vscode/
+# Environment variables
+.env
+config.js
+# Node modules
+node_modules/
 
 # Image files
 *.jpg
