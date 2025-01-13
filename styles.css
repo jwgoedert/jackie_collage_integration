@@ -1,4 +1,4 @@
-General Styles body {
+body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
@@ -68,12 +68,12 @@ nav a {
   height: auto;
   border-radius: 8px;
 }
-
+/* 
 #nav-buttons {
   display: flex;
   justify-content: space-between;
   margin: 10px 20px;
-}
+} */
 
 button {
   background-color: #007acc;
@@ -238,7 +238,7 @@ body {
 }
 
 #nav-buttons {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
