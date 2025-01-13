@@ -1,128 +1,166 @@
-General Styles
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  #vine-container {
-    display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    background-color: #f3f3f3;
-    padding: 20px;
-  }
-  
-  #vine-line {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .project {
-    flex-shrink: 0;
-    width: 200px;
-    height: 300px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-  
-  .project img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  #nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 20px;
-  }
-  
-  button {
-    background-color: #007acc;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  button:hover {
-    background-color: #005f99;
-  }
-  #year-indicator {
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 2rem;
-    color: #333;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
-  
-  /* Modal Styles */
-  #modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  #modal-content {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    width: 100%;
-    height: 100vh;
-    /* max-width: 800px; */
-    text-align: center;
-  }
-  #modal-columns {
-    display: flex;
-    justify-content: space-between;
-  }
-  #modal-column-left {
-    flex: 1;
-    margin-right: 10px;
-  }
-  #modal-column-right {
-    flex: 1;
-    margin-left: 10px;
-  }
-  #related-projects {
-    margin-top: 20px;
-    text-align: left;
-    min-height: 50vh;
-  }
-  
-  #gallery img {
-    margin: 10px;
-    max-width: 100px;
-    max-height: 100px;
-  }
-  
-  #related-projects li {
-    list-style: none;
-    margin: 5px 0;
-  }
-  /* New styles and overrides */
-  /* General Styles */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  /* background: #f5fee6; */
+  background: #ffffff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+  font-size: 1.5rem;
+  color: rgb(0, 97, 0);
+}
+.header a.nav-link {
+  text-decoration: none;
+  color: rgb(0, 97, 0);
+}
+
+nav {
+  padding-right: 2rem;
+}
+
+nav a {
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: rgb(0, 97, 0);
+}
+
+#vine-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  background-color: #f3f3f3;
+  padding: 20px;
+}
+
+#vine-line {
+  display: flex;
+  gap: 20px;
+}
+
+.project {
+  flex-shrink: 0;
+  width: 200px;
+  height: 300px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.project img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+/* 
+#nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px;
+} */
+
+button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #005f99;
+}
+
+#year-indicator {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Modal Styles */
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none;
+}
+
+#modal-content {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  height: 90vh;
+  /* max-width: 800px; */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#modal-columns {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#modal-column-left, 
+#modal-column-right {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0 10px;
+}
+
+#related-projects {
+  margin-top: 20px;
+  text-align: left;
+  min-height: 50vh;
+}
+
+#gallery img {
+  margin: 10px;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+#related-projects li {
+  list-style: none;
+  margin: 5px 0;
+}
+
+/* New styles and overrides */
+/* General Styles */
 /* General Styles */
 body {
   margin: 0;
@@ -140,17 +178,21 @@ body {
 
 #vine-line {
   display: flex;
-  flex-direction: row; /* Horizontal alignment */
-  gap: 100px; /* Adjust spacing between year sections */
+  flex-direction: row;
+  /* Horizontal alignment */
+  gap: 100px;
+  /* Adjust spacing between year sections */
   width: 100%;
   height: 100%;
   position: relative;
 }
 
 .year-section {
-  flex: 0 0 100%; /* Full screen width for each year */
+  flex: 0 0 100%;
+  /* Full screen width for each year */
   display: flex;
-  flex-direction: row; /* Align parents horizontally */
+  flex-direction: row;
+  /* Align parents horizontally */
   justify-content: space-between;
   align-items: center;
   scroll-snap-align: start;
@@ -196,7 +238,7 @@ body {
 }
 
 #nav-buttons {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -229,3 +271,10 @@ button:hover {
   transition: opacity 0.4s ease-in-out;
 }
 
+.content {
+  margin-top: 6rem;
+  margin-left: 6rem;
+}
+.about-text{
+  padding-bottom: 8rem;
+}

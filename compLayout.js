@@ -1,18 +1,48 @@
+import CONFIG from './config.js';
 const vineContainer = document.getElementById("vine-container");
 const vineLine = document.getElementById("vine-line");
 const viewWidth = window.innerWidth;
 const viewHeight = window.innerHeight;
 const svgNamespace = "http://www.w3.org/2000/svg";
-let nodeSize = 300;
-
-const basePath = "data/converted_collages";
+let nodeSize = 300;// const basePath = "data/converted_collages";
+const basePath = "data/collages_compiled";
 let years = [];
 let currentYearIndex = 0;
 
-fetch("data/projects.json")
-  .then(response => response.json())
-  .then(projects => renderProjects(projects))
-  .catch(err => console.error("Error fetching JSON:", err));
+// Fetch projects from API
+function fetchProjects() {
+  const API_URL = "http://137.184.181.147:1337/api/projects?populate=*&filters[Name][$notNull]=True&pagination[pageSize]=200"; // Replace with your API URL
+  return fetch(API_URL, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`API call failed with status: ${response.status}`);
+      }
+      console.log("API call successful.", response);
+      return response.json();
+    })
+    .then(data => {
+      console.log("API Response Data:", data)
+      return data.data;
+    })
+
+    .catch(err => {
+      console.error("Error fetching projects:", err);
+      throw err;
+    });
+}
+
+// Initialize the application
+fetchProjects()
+  .then(projects => {
+    renderProjects(projects);
+  })
+  .catch(err => {
+    console.error("Failed to initialize:", err);
+  });
 
 function renderProjects(projects) {
   setVineContainerWidth(projects);
@@ -21,7 +51,8 @@ function renderProjects(projects) {
   const svgElement = renderVineSvg(setVineNodeData(projects));
 
   // Step 2: Render the project nodes (collages/images)
-  renderProjectNodes(svgElement, setVineNodeData(projects));
+  renderProjectNodes(svgElement, projects);
+
 
   console.log("Vine rendering complete.");
 }
@@ -33,12 +64,15 @@ function setVineContainerWidth(projects) {
 
 function setVineNodeData(projects) {
   const vineData = projects.reduce((vineData, project) => {
+    console.log('project', project);
+    console.log('project.Date', project.Date);
     if (!vineData[project.Date]) vineData[project.Date] = {};
-    if (!vineData[project.Date][project["Parent Vine"]]) vineData[project.Date][project["Parent Vine"]] = [];
-    vineData[project.Date][project["Parent Vine"]].push(project);
+    if (!vineData[project.Date][project["ParentVine"]]) vineData[project.Date][project["ParentVine"]] = [];
+    vineData[project.Date][project["ParentVine"]].push(project);
+    console.log('setVineData', vineData);
     return vineData;
   }, {});
-  
+
   const years = Object.keys(vineData).sort();
   years.forEach((year, index) => {
     vineData[year].yearIndex = index;
@@ -91,7 +125,7 @@ function renderVineSvg(vineData) {
             );
           }
 
-          // Update the global coordinates for this parent vine
+          // Update the global coordinates for this parentvine
           globalParentVineCoords[parentVine] = { x: nodeX, y: nodeY };
         });
       }
@@ -102,7 +136,9 @@ function renderVineSvg(vineData) {
   return svgElement;
 }
 
-function renderProjectNodes(svgElement, vineData) {
+function renderProjectNodes(svgElement, projects) {
+  const vineData = setVineNodeData(projects)
+  console.log('nodeData', vineData);
   Object.keys(vineData).forEach(year => {
     let yearIndex = vineData[year].yearIndex;
 
@@ -120,8 +156,8 @@ function renderProjectNodes(svgElement, vineData) {
 
           const imgElement = document.createElementNS(svgNamespace, "image");
           imgElement.setAttribute("href", imagePath);
-          imgElement.setAttribute("x", nodeX - (nodeSize/2)); // Center horizontally
-          imgElement.setAttribute("y", nodeY - (nodeSize/2)); // Center vertically
+          imgElement.setAttribute("x", nodeX - (nodeSize / 2)); // Center horizontally
+          imgElement.setAttribute("y", nodeY - (nodeSize / 2)); // Center vertically
           imgElement.setAttribute("width", nodeSize);
           imgElement.setAttribute("height", nodeSize);
 
@@ -139,7 +175,7 @@ function renderProjectNodes(svgElement, vineData) {
           });
 
           // Add click handler to open modal
-          imgElement.addEventListener("click", () => openModal(project));
+          imgElement.addEventListener("click", () => openModal(project, projects));
 
           svgElement.appendChild(imgElement);
         });
@@ -166,7 +202,7 @@ function drawBezierCurve(x1, y1, x2, y2, stroke, strokeWidth, appendToElement) {
   appendToElement.appendChild(path);
 }
 
-function openModal(project) {
+function openModal(project, projects) {
   const modal = document.getElementById("modal");
   const modalTitle = document.getElementById("modal-title");
   const modalDateLocation = document.getElementById("modal-date-location");
@@ -177,7 +213,7 @@ function openModal(project) {
 
   modalTitle.textContent = project.Name;
   modalDateLocation.textContent = `${project.Date || "Unknown"} - ${project["Location(s)"] || "Unknown"}`;
-  modalParentVine.textContent = project["Parent Vine"];
+  modalParentVine.textContent = project["ParentVine"];
   modalDescription.textContent = project.Description || "No description available.";
 
   gallery.innerHTML = "";
@@ -192,9 +228,18 @@ function openModal(project) {
     gallery.appendChild(img);
   }
 
-  project["Collaborators"].forEach(collaborator => {
+  const parentVineProjects = projects.filter(p => p["ParentVine"] === project["ParentVine"]);
+
+  parentVineProjects.forEach(p => {
     const li = document.createElement("li");
-    li.textContent = collaborator;
+    li.textContent = p.Name;
+    li.style.cursor = "pointer";
+    if (p.Name === project.Name) {
+      li.style.fontWeight = "bold";
+      li.style.color = "blue"; // Highlight the current project
+    } else {
+      li.addEventListener("click", () => openModal(p, projects));
+    }
     relatedProjects.appendChild(li);
   });
 

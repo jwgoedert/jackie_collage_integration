@@ -14,7 +14,7 @@ const yearDisplay = document.createElement("div");
 yearDisplay.id = "year-display";
 document.body.appendChild(yearDisplay);
 
-const basePath = "data/converted_collages";
+const basePath = "data/collages_compiled";
 let years = [];
 let currentYearIndex = 0;
 
