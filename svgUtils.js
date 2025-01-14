@@ -8,6 +8,7 @@ const basePath = "data/collages_compiled";
 
 export function setVineContainerWidth(vineData) {
     const vineContainer = document.getElementById("vine-container");
+    const vineLine = document.getElementById("vine-line");
     const vineLength = Object.keys(vineData).length;
     vineContainer.style.width = `${vineLength * 100}vw`;
 
@@ -16,7 +17,7 @@ export function setVineContainerWidth(vineData) {
         const yearSection = document.createElement("div");
         yearSection.className = "year-section";
         yearSection.style.width = `${viewWidth}px`;
-        yearSection.style.height = `20px`;
+        yearSection.style.height = "100%";
         yearSection.id = `year-${year}`;
         // yearSection.style.backgroundColor = "transparent";
         // const yearText = document.createElement("div");
@@ -29,7 +30,10 @@ export function setVineContainerWidth(vineData) {
         // yearText.style.zIndex = "-1";
         // yearSection.appendChild(yearText);
         // yearSection.style.transform = `translateX(${yearIndex * viewWidth}px)`;
-        vineContainer.appendChild(yearSection);
+        // vineContainer.appendChild(yearSection);
+        vineLine.appendChild(yearSection);
+        console.log(`Added year-section for year: ${year}, Index: ${yearIndex}`);
+
     });
 }
 
@@ -41,10 +45,6 @@ export function createSvgContainer() {
     svgElement.setAttribute("width", "100%");
     svgElement.setAttribute("height", `${viewHeight}px`);
     svgElement.style.position = "absolute";
-    // unsure about next to lines -- edit?
-    // svgElement.style.top = "0";
-    // svgElement.style.left = "0";
-
     svgElement.id = "vine-svg";
 
     // Create groups for vines and nodes
@@ -57,6 +57,13 @@ export function createSvgContainer() {
     svgElement.appendChild(nodeGroup);
 
     document.getElementById("vine-line").appendChild(svgElement);
+    // const vineLine = document.getElementById("vine-line");
+    // if (!vineLine) {
+    //     console.error("vine-line not found in the DOM.");
+    //     return null;
+    // }
+    // vineLine.insertBefore(svgElement, vineLine.firstChild);
+
     return svgElement;
 }
 
