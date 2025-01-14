@@ -1,4 +1,3 @@
-import CONFIG from './config.js';
 const vineContainer = document.getElementById("vine-container");
 const vineLine = document.getElementById("vine-line");
 const viewWidth = window.innerWidth;
@@ -11,12 +10,9 @@ let currentYearIndex = 0;
 
 // Fetch projects from API
 function fetchProjects() {
-  const API_URL = "http://137.184.181.147:1337/api/projects?populate=*&filters[Name][$notNull]=True&pagination[pageSize]=200"; // Replace with your API URL
-  return fetch(API_URL, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  // const API_URL = "http://137.184.181.147:1337/api/projects?populate=*&filters[Name][$notNull]=True&pagination[pageSize]=200"; // Replace with your API URL
+  const API_URL = "http://137.184.181.147:1337/api/projects/group-by-year"; // Replace with your API URL
+  return fetch(API_URL)
     .then(response => {
       if (!response.ok) {
         throw new Error(`API call failed with status: ${response.status}`);
@@ -25,8 +21,8 @@ function fetchProjects() {
       return response.json();
     })
     .then(data => {
-      console.log("API Response Data:", data)
-      return data.data;
+      console.log("API Response Data:", data);
+      return data;
     })
 
     .catch(err => {
@@ -45,6 +41,7 @@ fetchProjects()
   });
 
 function renderProjects(projects) {
+  console.log("Rendering vine...", projects);
   setVineContainerWidth(projects);
 
   // Step 1: Render the SVG container and paths
@@ -52,13 +49,11 @@ function renderProjects(projects) {
 
   // Step 2: Render the project nodes (collages/images)
   renderProjectNodes(svgElement, projects);
-
-
   console.log("Vine rendering complete.");
 }
 
 function setVineContainerWidth(projects) {
-  let vineLength = [...new Set(projects.map(p => Math.floor(p.Date || 0)))].sort().length;
+  let vineLength = Object.keys(projects).length;
   vineContainer.style.width = `${vineLength * 100 || 1}vw`;
 }
 
