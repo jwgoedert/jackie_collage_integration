@@ -4,9 +4,9 @@ import { renderProjects } from './renderProjects.js';
 // Initialize the Application
 async function init() {
   try {
-    const projects = await fetchProjectsByYear();
+    const projectsByYear = await fetchProjectsByYear();
     window.projectsByParent = await fetchProjectsByParent();
-    renderProjects(projects, window.projectsByParent);
+    renderProjects(projectsByYear, window.projectsByParent);
   } catch (error) {
     console.error("Failed to initialize:", error);
   }
