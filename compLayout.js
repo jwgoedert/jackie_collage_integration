@@ -85,12 +85,22 @@ function createSvgContainer() {
   svgElement.style.position = "absolute";
   svgElement.id = "vine-svg";
 
+   // Create groups for vines and nodes
+   const vineGroup = document.createElementNS(svgNamespace, "g");
+   vineGroup.id = "vine-group"; // Group for vine paths
+   svgElement.appendChild(vineGroup);
+ 
+   const nodeGroup = document.createElementNS(svgNamespace, "g");
+   nodeGroup.id = "node-group"; // Group for image nodes
+   svgElement.appendChild(nodeGroup);
+
   vineLine.appendChild(svgElement);
   return svgElement;
 }
 
 // Render Project Nodes
 function renderProjectNodes(svgElement, vineData) {
+  const nodeGroup = document.getElementById("node-group");
   Object.entries(vineData).forEach(([year, yearData]) => {
     const yearIndex = yearData.yearIndex;
     Object.entries(yearData).forEach(([parentVine, projects], parentIndex) => {
@@ -101,7 +111,7 @@ function renderProjectNodes(svgElement, vineData) {
           const imagePath = `${basePath}/${project.Date} ${normalizeName(project.Name)}_collage/${project.Date} ${normalizeName(project.Name)}_collage-0.png`;
 
           const imgElement = createImageNode(imagePath, nodeX, nodeY, project, vineData);
-          svgElement.appendChild(imgElement);
+          nodeGroup.appendChild(imgElement);
         });
       }
     });
@@ -110,6 +120,7 @@ function renderProjectNodes(svgElement, vineData) {
 
 // Render Vine Paths
 function renderVinePaths(svgElement, vineData) {
+  const vineGroup = document.getElementById("vine-group");
   const greenColors = ["#004d00", "#006600", "#008000", "#009900"];
   let globalParentVineCoords = {};
 
@@ -129,7 +140,7 @@ function renderVinePaths(svgElement, vineData) {
               nodeY,
               greenColors[parentIndex % greenColors.length],
               2,
-              svgElement
+              vineGroup
             );
           }
           globalParentVineCoords[parentVine] = { x: nodeX, y: nodeY };
