@@ -9,6 +9,27 @@ const basePath = "data/collages_compiled";
 export function setVineContainerWidth(vineData) {
   const vineLength = Object.keys(vineData).length;
   document.getElementById("vine-container").style.width = `${vineLength * 100}vw`;
+//   set invisible divs the width of the screen for each year for scrolling
+const vineContainer = document.getElementById("vine-container");
+Object.keys(vineData).forEach((year, yearIndex) => {
+    const yearSection = document.createElement("div");
+    yearSection.className = "year-section";
+    yearSection.style.width = `${viewWidth}px`;
+    yearSection.id = `year-${year}`;
+    yearSection.style.backgroundColor = "transparent";
+    const yearText = document.createElement("div");
+    yearText.className = "year-text";
+    yearText.innerText = year;
+    yearText.style.position = "absolute";
+
+    yearText.style.transform = "translate(150%)";
+    yearText.style.fontSize = "10rem";
+    yearText.style.color = "rgba(0, 255, 55, 0.8)";
+    yearText.style.zIndex = "-1";
+    yearSection.appendChild(yearText);
+    yearSection.style.transform = `translateX(${yearIndex * viewWidth}px)`;
+    vineContainer.appendChild(yearSection);
+});
 }
 
 export function createSvgContainer() {
