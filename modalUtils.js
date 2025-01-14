@@ -47,6 +47,10 @@ export function openModal(project, projects, projectsByParent) {
   modal.classList.remove("hidden");
 }
 
+document.getElementById("modal-close").addEventListener("click", () => {
+  document.getElementById("modal").classList.add("hidden");
+});
+
 export function normalizeName(name) {
   return name.replace(/[^a-zA-Z0-9\s]/g, "").replace(/\s+/g, " ").trim();
 }
