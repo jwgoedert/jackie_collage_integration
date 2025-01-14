@@ -35,35 +35,6 @@ nav a {
   color: rgb(0, 97, 0);
 }
 
-#vine-container {
-  display: flex;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  height: 100vh;
-  position: relative;
-  background-color: #f3f3f3;
-  padding: 20px;
-}
-
-#vine-line {
-  display: flex;
-  flex-direction: row;
-  gap: 100px;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.year-section {
-  flex: 0 0 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  scroll-snap-align: start;
-  position: relative;
-  height: 100%;
-}
 
 .parent-vine {
   display: flex;
@@ -92,13 +63,56 @@ nav a {
 }
 
 /* Vine SVG Connections */
-.vine-svg {
+#vine-container {
+  display: flex;
+  /* flex-direction:column; */
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  height: 100vh;
+  position: relative;
+  background-color: #f3f3f3;
+  padding: 20px;
+}
+
+#vine-line {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#vine-svg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  /* pointer-events: none; */
+  z-index: 2;
+}
+
+/* .year-section {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  scroll-snap-align: start;
+  position: relative;
+  height: 40px;
+  z-index: 1;
+  pointer-events:none;
+} */
+.year-section {
+  flex: 0 0 100vw; 
+  height: 100%;
+  border:1px solid pink;
+  box-sizing:border-box;
+  position: relative;
+  scroll-snap-align: start;
+
 }
 
 #nav-buttons {
