@@ -19,18 +19,12 @@ export function setVineContainerWidth(vineData) {
         yearSection.style.width = `${viewWidth}px`;
         yearSection.style.height = "100%";
         yearSection.id = `year-${year}`;
-        // yearSection.style.backgroundColor = "transparent";
         const yearText = document.createElement("div");
         yearText.className = "year-text";
         yearText.innerText = year;
         yearText.style.position = "absolute";
-        // yearText.style.transform = "translate(150%)";
         yearText.style.fontSize = "20rem";
-        // yearText.style.color = "rgba(0, 255, 55, 0.8)";
-        // yearText.style.zIndex = "-1";
         yearSection.appendChild(yearText);
-        // yearSection.style.transform = `translateX(${yearIndex * viewWidth}px)`;
-        // vineContainer.appendChild(yearSection);
         vineLine.appendChild(yearSection);
         console.log(`Added year-section for year: ${year}, Index: ${yearIndex}`);
 
@@ -48,12 +42,14 @@ export function createSvgContainer() {
     svgElement.id = "vine-svg";
 
     // Create groups for vines and nodes
+    // Group for vine paths
     const vineGroup = document.createElementNS(svgNamespace, "g");
-    vineGroup.id = "vine-group"; // Group for vine paths
+    vineGroup.id = "vine-group"; 
     svgElement.appendChild(vineGroup);
-
+    
+    // Group for image nodes
     const nodeGroup = document.createElementNS(svgNamespace, "g");
-    nodeGroup.id = "node-group"; // Group for image nodes
+    nodeGroup.id = "node-group"; 
     svgElement.appendChild(nodeGroup);
 
     document.getElementById("vine-line").appendChild(svgElement);
