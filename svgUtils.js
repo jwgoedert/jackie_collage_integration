@@ -66,8 +66,8 @@ export function renderProjectNodes(svgElement, vineData) {
                 const nodeY = calculateNodeY(parentIndex, yearData);
                 projects.forEach((project, index) => {
                     const nodeX = calculateNodeX(index, yearIndex, projects.length);
-                    const imagePath = `${basePath}/${project.Date} ${normalizeName(project.Name)}_collage/${project.Date} ${normalizeName(project.Name)}_collage-0.png`;
-
+                    // const imagePath = `${basePath}/${project.Date} ${normalizeName(project.Name)}_collage/${project.Date} ${normalizeName(project.Name)}_collage-0.png`;
+                    const imagePath = `data/collages_flat/${project.Date} ${normalizeName(project.Name)}_collage-0.png`;
                     const imgElement = createImageNode(imagePath, nodeX, nodeY, project, vineData);
                     nodeGroup.appendChild(imgElement);
                 });
