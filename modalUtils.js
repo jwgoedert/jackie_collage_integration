@@ -34,7 +34,9 @@ export function openModal(project, projects, projectsByParent) {
       li.style.cursor = "pointer";
       if (p.Name === project.Name) {
         li.style.fontWeight = "bold";
-        li.style.color = "blue"; // Highlight the current project
+        li.style.color = "white";
+        li.style.backgroundColor = "green"; // Highlight the current project
+        li.style.padding = "0.75rem";
       } else {
         li.addEventListener("click", () => openModal(p, projects, projectsByParent));
       }

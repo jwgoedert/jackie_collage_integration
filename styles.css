@@ -218,6 +218,8 @@ button:hover {
   margin-top: 20px;
   text-align: left;
   min-height: 50vh;
+  font-size: 1.25rem;
+  color:#016e35;
 }
 
 #gallery img {
