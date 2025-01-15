@@ -20,15 +20,15 @@ export function setVineContainerWidth(vineData) {
         yearSection.style.height = "100%";
         yearSection.id = `year-${year}`;
         // yearSection.style.backgroundColor = "transparent";
-        // const yearText = document.createElement("div");
-        // yearText.className = "year-text";
-        // yearText.innerText = year;
-        // yearText.style.position = "absolute";
+        const yearText = document.createElement("div");
+        yearText.className = "year-text";
+        yearText.innerText = year;
+        yearText.style.position = "absolute";
         // yearText.style.transform = "translate(150%)";
-        // yearText.style.fontSize = "10rem";
+        yearText.style.fontSize = "20rem";
         // yearText.style.color = "rgba(0, 255, 55, 0.8)";
         // yearText.style.zIndex = "-1";
-        // yearSection.appendChild(yearText);
+        yearSection.appendChild(yearText);
         // yearSection.style.transform = `translateX(${yearIndex * viewWidth}px)`;
         // vineContainer.appendChild(yearSection);
         vineLine.appendChild(yearSection);
@@ -57,12 +57,6 @@ export function createSvgContainer() {
     svgElement.appendChild(nodeGroup);
 
     document.getElementById("vine-line").appendChild(svgElement);
-    // const vineLine = document.getElementById("vine-line");
-    // if (!vineLine) {
-    //     console.error("vine-line not found in the DOM.");
-    //     return null;
-    // }
-    // vineLine.insertBefore(svgElement, vineLine.firstChild);
 
     return svgElement;
 }
