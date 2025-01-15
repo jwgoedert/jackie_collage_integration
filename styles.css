@@ -93,18 +93,6 @@ nav a {
   z-index: 2;
 }
 
-/* .year-section {
-  flex: 0 0 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  scroll-snap-align: start;
-  position: relative;
-  height: 40px;
-  z-index: 1;
-  pointer-events:none;
-} */
 .year-section {
   flex: 0 0 100vw; 
   height: 100%;
@@ -112,7 +100,14 @@ nav a {
   box-sizing:border-box;
   position: relative;
   scroll-snap-align: start;
-
+}
+.year-text {
+  position: absolute;
+  top: 40vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20vh;
+  color: rgba(0, 0, 0, 0.15);
 }
 
 #nav-buttons {
@@ -138,10 +133,6 @@ button:hover {
 }
 
 #year-display {
-  /* position: absolute;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%); */
   font-size: 4rem;
   color: rgba(0, 0, 0, 0.8);
   opacity: 1;
