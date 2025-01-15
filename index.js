@@ -12,6 +12,7 @@ function updateYearDisplay() {
 }
 
 function navigate(direction) {
+  console.log('direction', direction);
   if (direction === "left" && currentYearIndex > 0) {
     currentYearIndex--;
   } else if (direction === "right" && currentYearIndex < years.length - 1) {
@@ -24,19 +25,19 @@ function navigate(direction) {
 function scrollToYear(index) {
   const yearSection = document.querySelectorAll(".year-section")[index];
   if (yearSection) {
-    yearSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    yearSection.scrollIntoView({ behavior: "smooth", block: "nearest", inline:"start" });
   }
 }
 
-function handleIntersection(entries) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const year = entry.target.id.replace("year-", "");
-      currentYearIndex = years.indexOf(year);
-      updateYearDisplay();
-    }
-  });
-}
+// function handleIntersection(entries) {
+//   entries.forEach(entry => {
+//     if (entry.isIntersecting) {
+//       const year = entry.target.id.replace("year-", "");
+//       currentYearIndex = years.indexOf(year);
+//       updateYearDisplay();
+//     }
+//   });
+// }
 // Initialize the Application
 async function init() {
   try {
@@ -56,14 +57,14 @@ async function init() {
     document.getElementById("nav-right").addEventListener("click", () => navigate("right"));
 
     // Set up IntersectionObserver to update year display on scroll
-    const observer = new IntersectionObserver(handleIntersection, {
-      root: document.getElementById("vine-container"),
-      threshold: 0.5
-    });
+    // const observer = new IntersectionObserver(handleIntersection, {
+    //   root: document.getElementById("vine-container"),
+    //   threshold: 0.5
+    // });
 
-    document.querySelectorAll(".year-section").forEach(section => {
-      observer.observe(section);
-    });
+    // document.querySelectorAll(".year-section").forEach(section => {
+    //   observer.observe(section);
+    // });
 
   } catch (error) {
     console.error("Failed to initialize:", error);
