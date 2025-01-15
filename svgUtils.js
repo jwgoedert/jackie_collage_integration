@@ -23,7 +23,7 @@ export function setVineContainerWidth(vineData) {
         yearText.className = "year-text";
         yearText.innerText = year;
         yearText.style.position = "absolute";
-        yearText.style.fontSize = "20rem";
+        // yearText.style.fontSize = "20rem";
         yearSection.appendChild(yearText);
         vineLine.appendChild(yearSection);
         console.log(`Added year-section for year: ${year}, Index: ${yearIndex}`);
@@ -116,7 +116,25 @@ function createImageNode(imagePath, x, y, project, projects) {
     imgElement.setAttribute("height", nodeSize);
 
     imgElement.onerror = () => imgElement.setAttribute("href", "/data/fallback-image.svg");
-    imgElement.addEventListener("mouseover", () => imgElement.setAttribute("opacity", "0.8"));
+    imgElement.addEventListener("mouseover", () => {
+        imgElement.setAttribute("opacity", "0.8");
+        const tooltip = document.createElement("div");
+        tooltip.className = "tooltip";
+        tooltip.innerText = `${project.Name} (${project.Date})`;
+        tooltip.style.position = "absolute";
+        tooltip.style.left = `${x}px`;
+        tooltip.style.top = `${y - nodeSize / 2 - 20}px`;
+        // tooltip.style.backgroundColor = "white";
+        tooltip.style.padding = "5px";
+        // tooltip.style.border = "1px solid black";
+        tooltip.style.zIndex = "1000";
+        document.body.appendChild(tooltip);
+
+        imgElement.addEventListener("mouseout", () => {
+            imgElement.setAttribute("opacity", "1");
+            document.body.removeChild(tooltip);
+        }, { once: true });
+    });
     imgElement.addEventListener("mouseout", () => imgElement.setAttribute("opacity", "1"));
     imgElement.addEventListener("click", () => openModal(project, projects, window.projectsByParent));
 
